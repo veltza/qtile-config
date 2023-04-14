@@ -13,6 +13,7 @@ noswallow = [
     "Chromium",
     "firefox",
     "Dragon-drop",
+    "Pinentry-gtk-2",
 ]
 
 @hook.subscribe.client_new
