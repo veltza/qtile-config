@@ -1,5 +1,6 @@
 from libqtile import hook
 from libqtile.lazy import lazy
+import subprocess
 
 @hook.subscribe.client_managed
 def show_window(window):
@@ -260,3 +261,12 @@ def volume_control(qtile, cmd, step=None):
 @lazy.function
 def backlight_control(qtile, cmd):
     qtile.widgets_map['backlightwidget'].cmd_change_backlight(cmd)
+
+@lazy.function
+def toggle_auto_fullscreen(qtile):
+    qtile.config.auto_fullscreen = not qtile.config.auto_fullscreen
+    status = "On" if qtile.config.auto_fullscreen else "Off"
+    subprocess.run(["/usr/bin/dunstify", "-t", "2000", "-r",
+                    "5560", "--icon=no-icon", "",
+                    f"<span font='JetBrainsMono Nerd Font 12'> Auto fullscreen: {status} \n</span>"],
+                    capture_output=False)

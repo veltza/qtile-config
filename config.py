@@ -49,6 +49,7 @@ keys = [
     EzKey("M-A-<Left>",             aspect_resize_floating(dh=-20),     desc="Decrease floating window aspect size"),
     EzKey("M-A-<Down>",             aspect_resize_floating(dh=20),      desc="Increase floating window aspect size"),
     EzKey("M-A-<Up>",               aspect_resize_floating(dh=-20),     desc="Decrease floating window aspect size"),
+    EzKey("M-S-f",                  toggle_auto_fullscreen(),           desc="Toggle auto fullscreen"),
     EzKey("M-f",                    lazy.window.toggle_fullscreen(),    desc="Toggle fullscreen"),
     EzKey("M-g",                    lazy.window.toggle_floating(),      desc="Toggle floating"),
     EzKey("M-x",                    toggle_minimize,                    desc="Toggle minimize"),
