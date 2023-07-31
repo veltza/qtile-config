@@ -70,6 +70,7 @@ keys = [
     EzKey("M-p",                    lazy.spawn("dmenu_run"),            desc="Launch dmenu_run"),
     EzKey("M-d",                    lazy.spawn("rofi-launcher"),        desc="Launch rofi-launcher"),
     EzKey("M-S-d",                  lazy.spawn("rofi-find"),            desc="Launch rofi-finder"),
+    EzKey("M-<Period>",             lazy.spawn("rofi-emoji"),           desc="Launch rofi-emoji"),
     EzKey("M-S-e",                  lazy.spawn("thunar"),               desc="Launch file manager"),
     EzKey("M-w",                    lazy.spawn("chromium"),             desc="Launch chromium"),
     EzKey("M-C-w",                  lazy.spawn("firefox"),              desc="Launch firefox"),
@@ -95,7 +96,8 @@ keys = [
     EzKey("M-m",                    increase_nmaster,                   desc="Increase the number of main windows"),
     EzKey("M-S-m",                  decrease_nmaster,                   desc="Decrease the number of main windows"),
     EzKey("M-b",                    lazy.hide_show_bar(),               desc="Toggle bar"),
-    EzKey("M-<Tab>",                prev_group,                         desc="Switch to previous group"),
+    EzKey("M-<Tab>",                latest_group,                       desc="Switch to latest group"),
+    EzKey("A-<Tab>",                latest_window,                      desc="Move focus to latest window"),
     EzKey("A-C-<delete>",           lazy.spawn("qtile-powermenu"),      desc="Launch powermenu"),
     EzKey("A-C-l",                  lazy.spawn("qtile-lock forcelock"), desc="Lock the session"),
     EzKey("M-S-C-r",                lazy.reload_config(),               desc="Reload the config"),
@@ -109,17 +111,17 @@ groups = [
             DropDown("spcalc", "qalculate-gtk",             opacity=1.0, x=0.31, y=0.255, width=0.380, height=0.490),
         ]
     ),
-    Group("1", label=""),
+    Group("1", label=""),
     Group("2", label=""),
     Group("3", label="", matches=[Match(wm_class=["Thunar"])]),
-    Group("4", label="", matches=[Match(title=["LibreOffice", "Soffice"]),
+    Group("4", label="󰏪", matches=[Match(title=["LibreOffice", "Soffice"]),
                                    Match(wm_instance_class=["soffice"])]),
     Group("5", label=""),
     Group("6", label="", matches=[Match(wm_class=["Gimp"]),
                                    Match(title=["GIMP Startup", "GNU Image Manipulation Program"])]),
     Group("7", label=""),
-    Group("8", label=""),
-    Group("9", label=""),
+    Group("8", label="󰇮"),
+    Group("9", label=""),
 ]
 
 for i in groups:
@@ -208,7 +210,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font = "Mononoki Nerd Font",
+    font = "mononoki Nerd Font",
     fontsize = 13.2,
     foreground = colors["mon_text"],
     background = colors["bar_bg"],
@@ -231,12 +233,12 @@ screens = [
                     active = colors["grp_fg_sel"],
                     inactive = colors["grp_fg_norm"],
                     borderwidth = 2,
-                    font = "monospace",
-                    fontsize = 15,
+                    font = "JetBrainsMono Nerd Font Mono",
+                    fontsize = 24,
                     margin_x = 0,
-                    margin_y = 4,
-                    spacing = 1,
-                    padding = 3,
+                    margin_y = 5,
+                    spacing = 3,
+                    padding = 2,
                 ),
                 CurrentLayoutIcon(
                     foreground = colors["win_fg_sel"],
@@ -253,7 +255,7 @@ screens = [
                         'Button1': toggle_minimize,
                         'Button3': lazy.spawn("xmenu-apps"),
                     },
-                    padding = 2,
+                    padding = 1,
                 ),
                 CapslockWidget(
                     update_interval = 86400,

@@ -7,7 +7,7 @@ def show_window(window):
     window.group.cmd_toscreen()
 
 @lazy.function
-def prev_group(qtile):
+def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
 @lazy.function
@@ -28,6 +28,12 @@ def prev_window(qtile):
     group.cmd_prev_window()
     if group.current_window and group.current_window.floating:
         group.current_window.cmd_bring_to_front()
+
+@lazy.function
+def latest_window(qtile):
+    group = qtile.current_group
+    if len(group.focus_history) > 1:
+        group.focus(group.focus_history[-2])
 
 @lazy.function
 def left_or_main(qtile):
