@@ -53,10 +53,25 @@ def _swallow_post(window):
         # enabled, the last group is that and the parent is then completely hidden.
         window.parent.togroup(window.qtile.groups[len(window.qtile.groups)-1].name)
 
+@hook.subscribe.client_focus
+def _client_focus(window):
+    layout = window.qtile.current_layout
+    if hasattr(layout, "new_client_position"):
+        window.last_position = layout.focused
+
 @hook.subscribe.client_killed
 def _unswallow(window):
     if hasattr(window, 'parent') and hasattr(window.parent, 'minimized'):
+        layout = window.qtile.current_layout
+        if hasattr(layout, "new_client_position"):
+            focused = layout.focused + 1
+            if focused == 1 and hasattr(window, 'last_position'):
+                focused = window.last_position
+            new_client_position_old = layout.new_client_position
+            layout.new_client_position = "before_current" if focused == 0 else "after_current"
         if window.parent.group != window.group:
             window.parent.togroup(window.group.name)
         window.parent.minimized = False
         window.group.focus(window.parent)
+        if hasattr(layout, "new_client_position"):
+            layout.new_client_position = new_client_position_old

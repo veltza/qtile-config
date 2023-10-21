@@ -4,7 +4,7 @@ import subprocess
 
 @hook.subscribe.client_managed
 def show_window(window):
-    window.group.cmd_toscreen()
+    window.group.toscreen()
 
 @lazy.function
 def latest_group(qtile):
@@ -15,19 +15,19 @@ def float_to_front(qtile):
     for group in qtile.groups:
         for window in group.windows:
             if window.floating:
-                window.cmd_bring_to_front()
+                window.bring_to_front()
 
 def next_window(qtile):
     group = qtile.current_group
-    group.cmd_next_window()
+    group.next_window()
     if group.current_window and group.current_window.floating:
-        group.current_window.cmd_bring_to_front()
+        group.current_window.bring_to_front()
 
 def prev_window(qtile):
     group = qtile.current_group
-    group.cmd_prev_window()
+    group.prev_window()
     if group.current_window and group.current_window.floating:
-        group.current_window.cmd_bring_to_front()
+        group.current_window.bring_to_front()
 
 @lazy.function
 def latest_window(qtile):
@@ -62,7 +62,7 @@ def left_or_main(qtile):
                     group.focus(win)
                     return
     else:
-        layout.cmd_left()
+        layout.left()
 
 @lazy.function
 def right_or_stack(qtile):
@@ -91,7 +91,7 @@ def right_or_stack(qtile):
                     group.focus(win)
                     return
     else:
-        layout.cmd_right()
+        layout.right()
 
 @lazy.function
 def rotate_all(qtile, dir):
@@ -158,7 +158,7 @@ def swap_main(qtile):
 @lazy.function
 def move_floating(qtile, dx: int = 0, dy: int = 0):
     if qtile.current_window:
-        qtile.current_window.cmd_move_floating(dx, dy)
+        qtile.current_window.move_floating(dx, dy)
 
 @lazy.function
 def move_floating_to_edge(qtile, dx: int = 0, dy: int = 0):
@@ -172,18 +172,18 @@ def move_floating_to_edge(qtile, dx: int = 0, dy: int = 0):
             x = scr.width - win.width - win.borderwidth*2
         if dy > 0:
             y = scr.height - win.height - win.borderwidth*2
-        win.cmd_set_position_floating(x, y)
+        win.set_position_floating(x, y)
 
 @lazy.function
 def resize_floating(qtile, dw: int = 0, dh: int = 0):
     if qtile.current_window:
-        qtile.current_window.cmd_resize_floating(dw, dh)
+        qtile.current_window.resize_floating(dw, dh)
 
 @lazy.function
 def aspect_resize_floating(qtile, dh: int = 0):
     win = qtile.current_window 
     if win:
-        win.cmd_resize_floating(int(dh * win.width / win.height), dh)
+        win.resize_floating(int(dh * win.width / win.height), dh)
 
 @lazy.function
 def fetch_windows(qtile, groupname):
@@ -195,18 +195,18 @@ def shrink_main(qtile):
     layout = qtile.current_layout
     if (layout.name in ["monadtall", "monadwide", "monadthreecol", "monaddeck"]
         and len(layout.clients) > 1):
-        layout.cmd_shrink_main()
+        layout.shrink_main()
     elif layout.name == "tile":
-        layout.cmd_decrease_ratio()
+        layout.decrease_ratio()
 
 @lazy.function
 def grow_main(qtile):
     layout = qtile.current_layout
     if (layout.name in ["monadtall", "monadwide", "monadthreecol", "monaddeck"]
         and len(layout.clients) > 1):
-        layout.cmd_grow_main()
+        layout.grow_main()
     elif layout.name == "tile":
-        layout.cmd_increase_ratio()
+        layout.increase_ratio()
 
 @lazy.function
 def shrink_shared(qtile):
@@ -214,7 +214,7 @@ def shrink_shared(qtile):
     if (layout.name in ["monadtall", "monadwide", "monadthreecol"]
         and len(layout.clients) > 2
         and layout.clients.current_index > 0):
-        layout.cmd_shrink()
+        layout.shrink()
 
 @lazy.function
 def grow_shared(qtile):
@@ -222,19 +222,19 @@ def grow_shared(qtile):
     if (layout.name in ["monadtall", "monadwide", "monadthreecol"]
         and len(layout.clients) > 2
         and layout.clients.current_index > 0):
-        layout.cmd_grow()
+        layout.grow()
 
 @lazy.function
 def decrease_nmaster(qtile):
     layout = qtile.current_layout
     if layout.name == "tile":
-        layout.cmd_decrease_nmaster()
+        layout.decrease_nmaster()
 
 @lazy.function
 def increase_nmaster(qtile):
     layout = qtile.current_layout
     if layout.name == "tile":
-        layout.cmd_increase_nmaster()
+        layout.increase_nmaster()
 
 @lazy.function
 def toggle_minimize(qtile):
@@ -266,7 +266,7 @@ def volume_control(qtile, cmd, step=None):
 
 @lazy.function
 def backlight_control(qtile, cmd):
-    qtile.widgets_map['backlightwidget'].cmd_change_backlight(cmd)
+    qtile.widgets_map['backlightwidget'].change_backlight(cmd)
 
 @lazy.function
 def toggle_auto_fullscreen(qtile):

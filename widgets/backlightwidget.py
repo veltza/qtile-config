@@ -94,7 +94,7 @@ class BacklightWidget(Backlight):
         else:
             return  f'<span foreground="{self.icon_color}">{self.icon}</span> {self.percentage}% | '
 
-    def cmd_change_backlight(self, direction, step=None):
+    def change_backlight(self, direction, step=None):
         if not self.backlight_name:
             return
         if self._future and not self._future.done():

@@ -13,7 +13,7 @@ class MonadDeck(MonadTall):
 
         # if no sizes or normalize flag is set, normalize
         if not self.relative_sizes or self.do_normalize:
-            self.cmd_normalize(False)
+            self.normalize(False)
 
         # if client not in this layout
         if not self.clients or client not in self.clients:

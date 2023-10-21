@@ -153,7 +153,7 @@ for i in groups:
     )
 
 colors = dict(
-    # Bar backround
+    # bar background
     bar_bg = "#07070d",
     # window borders and title
     win_border_sel = "#AEC2C6",
