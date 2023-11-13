@@ -106,9 +106,9 @@ keys = [
 groups = [
     ScratchPad("scratchpad",
         [
-            DropDown("spterm", "st",                        opacity=1.0, x=0.24, y=0.200, width=0.519, height=0.584),
-            DropDown("spfm",   "st -e 'lf - File Manager'", opacity=1.0, x=0.20, y=0.158, width=0.594, height=0.685),
-            DropDown("spcalc", "qalculate-gtk",             opacity=1.0, x=0.31, y=0.255, width=0.380, height=0.490),
+            DropDown("spterm", "st -A 0.95",                        opacity=1.0, x=0.24, y=0.200, width=0.519, height=0.584),
+            DropDown("spfm",   "st -A 0.95 -e 'lf - File Manager'", opacity=1.0, x=0.20, y=0.158, width=0.594, height=0.685),
+            DropDown("spcalc", "qalculate-gtk",                     opacity=1.0, x=0.31, y=0.255, width=0.380, height=0.490),
         ]
     ),
     Group("1", label=""),

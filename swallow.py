@@ -6,7 +6,7 @@ from libqtile import hook
 
 terminals = [
     #"Alacritty",
-    "st-256color",
+    "St",
 ]
 
 noswallow = [
@@ -14,6 +14,7 @@ noswallow = [
     "firefox",
     "Dragon-drop",
     "Pinentry-gtk-2",
+    "St"
 ]
 
 @hook.subscribe.client_new
