@@ -8,7 +8,7 @@ class CapslockWidget(base.ThreadPoolText):
     defaults = [
         ("update_interval", 1, "Update time in seconds"),
         ("notifications", True, "show notifications"),
-        ("notification_font", "JetBrainsMono Nerd Font 12", "font for notifications"),
+        ("notification_font", "JetBrainsMono NF 12", "font for notifications"),
         ("notification_time", 2000, "expiration time (in milliseconds) for notifications"),
         ("notification_id", 5559, "id for notifications"),
     ]
