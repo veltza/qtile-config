@@ -1,3 +1,4 @@
+import re
 from os.path import expanduser
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, EzKey, Match, Screen, ScratchPad, DropDown
@@ -7,6 +8,7 @@ from layouts import *
 from widgets import *
 from functions import *
 from swallow import *
+from sticky import *
 
 keys = [
     # Switch between windows
@@ -50,10 +52,11 @@ keys = [
     EzKey("M-A-<Down>",             aspect_resize_floating(dh=20),      desc="Increase floating window aspect size"),
     EzKey("M-A-<Up>",               aspect_resize_floating(dh=-20),     desc="Decrease floating window aspect size"),
     EzKey("M-S-f",                  toggle_auto_fullscreen(),           desc="Toggle auto fullscreen"),
+    EzKey("M-a",                    toggle_gaps,                        desc="Toggle gaps"),
     EzKey("M-f",                    lazy.window.toggle_fullscreen(),    desc="Toggle fullscreen"),
     EzKey("M-g",                    lazy.window.toggle_floating(),      desc="Toggle floating"),
     EzKey("M-x",                    toggle_minimize,                    desc="Toggle minimize"),
-    EzKey("M-a",                    toggle_gaps,                        desc="Toggle gaps"),
+    EzKey("M-S-s",                  toggle_sticky_windows(),            desc="Toggle state of sticky for current window"),
     EzKey("M-C-g",                  float_to_front,                     desc="Bring floating windows to front"),
     EzKey("M-<Space>",              swap_main,                          desc="Swap current window to main pane"),
     EzKey("M-S-q",                  lazy.window.kill(),                 desc="Kill focused window"),
@@ -113,12 +116,12 @@ groups = [
     ),
     Group("1", label=""),
     Group("2", label=""),
-    Group("3", label="", matches=[Match(wm_class=["Thunar"])]),
-    Group("4", label="󰏪", matches=[Match(title=["LibreOffice", "Soffice"]),
-                                   Match(wm_instance_class=["soffice"])]),
+    Group("3", label="", matches=[Match(wm_class="Thunar")]),
+    Group("4", label="󰏪", matches=[Match(title=re.compile(r"^(LibreOffice|Soffice)$")),
+                                   Match(wm_instance_class="soffice")]),
     Group("5", label=""),
-    Group("6", label="", matches=[Match(wm_class=["Gimp"]),
-                                   Match(title=["GIMP Startup", "GNU Image Manipulation Program"])]),
+    Group("6", label="", matches=[Match(wm_class="Gimp"),
+                                   Match(title=re.compile(r"^(GIMP\ Startup|GNU\ Image\ Manipulation\ Program)$"))]),
     Group("7", label=""),
     Group("8", label="󰇮"),
     Group("9", label=""),
@@ -247,7 +250,7 @@ screens = [
                     use_mask = True,
                     padding = 8,
                 ),
-                widget.WindowName(
+                WinName(
                     foreground = colors["win_fg_sel"],
                     font = "Fira Sans Dwm",
                     fontsize = 13.7,

@@ -6,3 +6,4 @@ from widgets.cpuwidget import CpuWidget
 from widgets.memwidget import MemWidget
 from widgets.netwidget import NetWidget
 from widgets.volumewidget import VolumeWidget
+from widgets.winname import WinName
