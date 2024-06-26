@@ -5,7 +5,7 @@
 * personalized keybindings and window rules
 * customized functions, hooks and widgets
 * a new layout: MonadDeck
-* compatible with Qtile v0.23.0
+* compatible with Qtile v0.26.0
 
 ## Dependencies
 

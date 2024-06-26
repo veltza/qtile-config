@@ -49,10 +49,10 @@ def _swallow_post(window):
     if hasattr(layout, "new_client_position_old"):
         layout.new_client_position = layout.new_client_position_old
         delattr(layout, "new_client_position_old")
+    # Move the minimized parent window to the last group and if the last group
+    # is ScratchPad, the parent window is then completely hidden.
     if hasattr(window, 'parent') and hasattr(window.parent, 'minimized'):
-        # Move the minimized parent window to the last group. If ScratchPad is
-        # enabled, the last group is that and the parent is then completely hidden.
-        window.parent.togroup(window.qtile.groups[len(window.qtile.groups)-1].name)
+        window.parent.togroup(window.qtile.groups[-1].name)
 
 @hook.subscribe.client_focus
 def _client_focus(window):
