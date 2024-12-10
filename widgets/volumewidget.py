@@ -43,7 +43,7 @@ class VolumeWidget(base.ThreadPoolText):
             volume = f"L: {vol_left}% R: {vol_right}%"
         icon = self._get_icon(vol_left, vol_right, mute, headphones)
         subprocess.run(["/usr/bin/dunstify", "-t", f"{self.notification_time}", "-r",
-                        f"{self.notification_id}", "--icon=no-icon", "",
+                        f"{self.notification_id}", "",
                         f"<span font='{self.notification_font}'> {icon} {volume} \n</span>"],
                        capture_output=False)
 

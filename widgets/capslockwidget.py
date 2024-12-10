@@ -23,7 +23,7 @@ class CapslockWidget(base.ThreadPoolText):
             return
         status = " Caps Lock On" if status else " Caps Lock Off"
         subprocess.run(["/usr/bin/dunstify", "-t", f"{self.notification_time}", "-r",
-                        f"{self.notification_id}", "--icon=no-icon", "",
+                        f"{self.notification_id}", "",
                         f"<span font='{self.notification_font}'> {status} \n</span>"],
                        capture_output=False)
 

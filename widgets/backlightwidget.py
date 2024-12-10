@@ -66,7 +66,7 @@ class BacklightWidget(Backlight):
     def _send_notification(self):
         if self.notifications:
             subprocess.run(["/usr/bin/dunstify", "-t", f"{self.notification_time}", "-r",
-                            f"{self.notification_id}", "--icon=no-icon", "",
+                            f"{self.notification_id}", "",
                             f"<span font='{self.notification_font}'> {self.icon} {self.percentage}% \n</span>"],
                             capture_output=False)
 

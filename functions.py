@@ -273,6 +273,6 @@ def toggle_auto_fullscreen(qtile):
     qtile.config.auto_fullscreen = not qtile.config.auto_fullscreen
     status = "On" if qtile.config.auto_fullscreen else "Off"
     subprocess.run(["/usr/bin/dunstify", "-t", "2000", "-r",
-                    "5560", "--icon=no-icon", "",
+                    "5560", "",
                     f"<span font='JetBrainsMono Nerd Font 12'> Auto fullscreen: {status} \n</span>"],
                     capture_output=False)
